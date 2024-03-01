@@ -1,0 +1,7 @@
+Which user and group are assigned to the /etc folder on your computer?
+
+You can use ls -l / to find the file
+
+it has the following: drwxr-xr-x  99 root root 8192 Feb 25 22:02 
+
+which means the user assigned to it is root, and the group is root
