@@ -37,7 +37,7 @@ operation = input()
 while operation not in ['1', '2', '3', '4']:
     prompt('Please choose 1, 2, 3, or 4!')
     operation = input()
-    
+
 # Perform the operation on the two numbers
 match operation:
     case '1':     # 1 represents addition
