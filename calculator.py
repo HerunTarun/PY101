@@ -1,36 +1,53 @@
-def prompt(message):            # abstracts prompts
+import json
+
+def prompt(message):
     print(f'==> {message}')
 
-def invalid_number(number_str): # checks for invalid operand input
+def invalid_number(number_str):
     try:
         int(number_str)
     except ValueError:
         return True
     return False
 
-prompt("Welcome to the Calculator Program!")
+language = 'en'
+
+prompt("Choose a language: english, francais")
+
+case language:
+    match 'english':
+        language = 'en'
+    match 'francais':
+        language = 'fr'
+    match _:
+        pass
+
+
+with open ('calculator_messages.json', 'r') as file:
+    data = json.load(file)
+
+prompt(data['start'])
 
 while True:
-    prompt("What's the first number? ")
+    prompt(data['first'])
     number1 = input()
     
     while invalid_number(number1):
-        prompt("Hmm, that doesn't look like a valid number")
+        prompt(data["invalid_num"])
         number1 = input()
 
-    prompt("What's the second number? ")
+    prompt(data['second'])
     number2 = input()
 
     while invalid_number(number2):
-        prompt("Hmm, that doesn't look like a valid number")
+        prompt(data["invalid_num"])
         number2 = input()
 
-    prompt("Select a number for the operation you would like to perform\n"
-           "1) Add 2) Subtract 3) Multiply 4) Divide")
+    prompt(data["select"])
     operation = input()
 
     while operation not in ['1', '2', '3', '4']:
-        prompt('Please choose 1, 2, 3, or 4!')
+        prompt(data['invalid_select'])
         operation = input()
 
     match operation:
@@ -43,10 +60,9 @@ while True:
         case '4':      # 4 represents division
             output = int(number1) / int(number2)
 
-    prompt(f'The result is: {output}')
+    prompt(data['result'] + f'{output}')
     
-    prompt(f'Do you want to perform more calculations?\n'
-            'Please select "y" or "n".')
+    prompt(data['again'])
     retry = input()
     if retry != "y":
         break

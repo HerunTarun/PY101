@@ -1,5 +1,10 @@
 {
-    messages : {
-        "start": "Welcome to the Calculator Program!"
-    }
+    "start": "Welcome to Calculator!",
+    "first": "What's the first number? ",
+    "invalid_num": "That doesn't look like a valid number! Try again?",
+    "second": "What's the second number? ",
+    "select": "Select a number for the operation you would like to perform\n1) Add 2) Subtract 3) Multiply 4) Divide",
+    "invalid_select": "Please choose 1, 2, 3, or 4!",
+    "result": "The result is: ",
+    "again": "Do you want to perform more calculations?\nPlease select 'y' or 'n'."
 }
