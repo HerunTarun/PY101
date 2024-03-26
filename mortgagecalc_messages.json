@@ -1,7 +1,10 @@
 {
     "start": "Hi! Welcome to the Mortgage Calculator!",
-    "obtain_loan_amount": "Please enter the mortgage amount as a number e.g. 124,500,000?",
-    "obtain_APR": "Please enter your Annual Percentage Rate (APR) as a number e.g. 5, not 5%",
-    "obtain_mortgage_duration": "Please enter the duration of mortgage in years",
-    "payment": "Your monthly payment is {monthly_payment}"
+    "obtain_loan_amount": "Please enter the mortgage amount as a number e.g. 124,500,000: ",
+    "invalid_loan_input": "Please enter a valid mortage amount!",
+    "funny_input": "Fool me once, shame on me. Fool me twice... you know how it goes!",
+    "obtain_apr": "Please enter your Annual Percentage Rate (APR) as a number e.g. 5, not 5%: ",
+    "invalid_apr": "Please enter a valid APR amount!"
+    "obtain_mortgage_duration": "Please enter the duration of mortgage as a number in months e.g. 36, not 36 months:",
+    "payment": "Your monthly payment is ${monthly_payment:.2f}"
 }
