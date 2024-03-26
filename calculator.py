@@ -25,7 +25,7 @@ def language_choice():
             language = 'en'
         case 'francais':
             language = 'fr'
-    
+
     return language
 
 def obtaining_numbers():
@@ -42,8 +42,8 @@ def obtaining_numbers():
     while invalid_number(number2):
         prompt(data['invalid_num'])
         number2 = input().strip()
-    
-    return number1, number2 
+
+    return number1, number2
 
 def invalid_division(num1, num2):
     try:
@@ -73,7 +73,7 @@ def the_calculator():
             while invalid_division(number1, number2):
                 prompt(data['invalid_division'])
                 number1, number2 = obtaining_numbers()
-            
+
             output = float(number1) / float(number2)
 
     prompt(data['result'] + f'{output:.2f}')
@@ -87,7 +87,7 @@ while True:
     the_calculator()
 
     prompt(data['again'])
-    
+
     retry = input()
     if retry != 'y':
         break
