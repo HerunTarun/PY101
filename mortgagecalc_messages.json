@@ -1,0 +1,7 @@
+{
+    "start": "Hi! Welcome to the Mortgage Calculator!",
+    "obtain_loan_amount": "Please enter the mortgage amount as a number e.g. 124,500,000?",
+    "obtain_APR": "Please enter your Annual Percentage Rate (APR) as a number e.g. 5, not 5%",
+    "obtain_mortgage_duration": "Please enter the duration of mortgage in years",
+    "payment": "Your monthly payment is {monthly_payment}"
+}
