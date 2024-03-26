@@ -28,12 +28,7 @@ def language_choice():
     
     return language
 
-with open ('calculator_messages.json', 'r') as file:
-    data = json.load(file)[language_choice()]
-
-prompt(data['start'])
-
-while True:
+def obtaining_numbers():
     prompt(data['first'])
     number1 = input().strip()
 
@@ -47,6 +42,18 @@ while True:
     while invalid_number(number2):
         prompt(data['invalid_num'])
         number2 = input().strip()
+    
+    return number1, number2 
+
+def invalid_division(num1, num2):
+    try:
+        float(num1) / float(num2)
+    except ZeroDivisionError:
+        return True
+    return False
+
+def the_calculator():
+    number1, number2 = obtaining_numbers()
 
     prompt(data['select'])
     operation = input().strip()
@@ -63,11 +70,26 @@ while True:
         case '3':      # 3 represents multiplication
             output = float(number1) * float(number2)
         case '4':      # 4 represents division
+            while invalid_division(number1, number2):
+                prompt(data['invalid_division'])
+                number1, number2 = obtaining_numbers()
+            
             output = float(number1) / float(number2)
 
     prompt(data['result'] + f'{output:.2f}')
 
+
+
+with open ('calculator_messages.json', 'r') as file:
+    data = json.load(file)[language_choice()]
+
+prompt(data['start'])
+
+while True:
+    the_calculator()
+
     prompt(data['again'])
+    
     retry = input()
     if retry != 'y':
         break
@@ -75,5 +97,5 @@ while True:
 
 # Improvements
 # X error response for invalid language selection rather than case _
-# divide by zero error
+# X divide by zero error
 # X accounting for white space in input

@@ -7,6 +7,7 @@
         "second": "What's the second number? ",
         "select": "Select a number for the operation you would like to perform\n1) Add 2) Subtract 3) Multiply 4) Divide",
         "invalid_select": "Please choose 1, 2, 3, or 4!",
+        "invalid_division": "Dividing by zero may cause the pope to have kittens, sorry! Try another division?",
         "result": "The result is: ",
         "again": "Do you want to perform more calculations?\nPlease select 'y' or 'n'."
         },
@@ -17,6 +18,7 @@
         "second": "Quel est le deuxieme numero? ",
         "select": "Sélectionnez un nombre pour l'opération que vous souhaitez effectuer\n1) Ajouter 2) Soustraire 3) Multiplier 4) Diviser",
         "invalid_select": "Veuillez choisir 1, 2, 3 ou 4 !",
+        "invalid_division": "En divisant par zéro, le pape pourrait avoir des chatons, désolé ! Essayer une autre division ?",
         "result": "Le résultat est: ",
         "again": "Voulez-vous effectuer plus de calculs ?\nVeuillez sélectionner « y » ou « n »."
     }
