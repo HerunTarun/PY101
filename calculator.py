@@ -78,8 +78,6 @@ def the_calculator():
 
     prompt(data['result'] + f'{output:.2f}')
 
-
-
 with open ('calculator_messages.json', 'r') as file:
     data = json.load(file)[language_choice()]
 
