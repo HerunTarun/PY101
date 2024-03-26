@@ -4,7 +4,8 @@
     "invalid_loan_input": "Please enter a valid mortage amount!",
     "funny_input": "Fool me once, shame on me. Fool me twice... you know how it goes!",
     "obtain_apr": "Please enter your Annual Percentage Rate (APR) as a number e.g. 5, not 5%: ",
-    "invalid_apr": "Please enter a valid APR amount!"
+    "invalid_apr_input": "Please enter a valid APR amount!",
     "obtain_mortgage_duration": "Please enter the duration of mortgage as a number in months e.g. 36, not 36 months:",
+    "invalid_duration_input": "Please enter a valid duration!",
     "payment": "Your monthly payment is ${monthly_payment:.2f}"
 }
