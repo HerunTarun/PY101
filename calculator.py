@@ -5,64 +5,75 @@ def prompt(message):
 
 def invalid_number(number_str):
     try:
-        int(number_str)
+        float(number_str)
     except ValueError:
         return True
     return False
 
-language = 'en'
+def language_choice():
+    language = 'en'
+    prompt("Choose a language: english or francais")
+    language = input().strip()
 
-prompt("Choose a language: english, francais")
+    while language not in ['english', 'francais']:
+        prompt("Try either 'english' or 'francais'!\n"
+           "Essayez « english » ou « francais »!")
+        language = input().strip()
 
-case language:
-    match 'english':
-        language = 'en'
-    match 'francais':
-        language = 'fr'
-    match _:
-        pass
-
+    match language:
+        case 'english':
+            language = 'en'
+        case 'francais':
+            language = 'fr'
+    
+    return language
 
 with open ('calculator_messages.json', 'r') as file:
-    data = json.load(file)
+    data = json.load(file)[language_choice()]
 
 prompt(data['start'])
 
 while True:
     prompt(data['first'])
-    number1 = input()
-    
+    number1 = input().strip()
+
     while invalid_number(number1):
-        prompt(data["invalid_num"])
-        number1 = input()
+        prompt(data['invalid_num'])
+        number1 = input().strip()
 
     prompt(data['second'])
-    number2 = input()
+    number2 = input().strip()
 
     while invalid_number(number2):
-        prompt(data["invalid_num"])
-        number2 = input()
+        prompt(data['invalid_num'])
+        number2 = input().strip()
 
-    prompt(data["select"])
-    operation = input()
+    prompt(data['select'])
+    operation = input().strip()
 
     while operation not in ['1', '2', '3', '4']:
         prompt(data['invalid_select'])
-        operation = input()
+        operation = input().strip()
 
     match operation:
         case '1':     # 1 represents addition
-            output = int(number1) + int(number2)
+            output = float(number1) + float(number2)
         case '2':     # 2 represents subtraction
-            output = int(number1) - int(number2)
+            output = float(number1) - float(number2)
         case '3':      # 3 represents multiplication
-            output = int(number1) * int(number2)
+            output = float(number1) * float(number2)
         case '4':      # 4 represents division
-            output = int(number1) / int(number2)
+            output = float(number1) / float(number2)
 
-    prompt(data['result'] + f'{output}')
-    
+    prompt(data['result'] + f'{output:.2f}')
+
     prompt(data['again'])
     retry = input()
-    if retry != "y":
+    if retry != 'y':
         break
+
+
+# Improvements
+# X error response for invalid language selection rather than case _
+# divide by zero error
+# X accounting for white space in input

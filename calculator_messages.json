@@ -1,10 +1,23 @@
 {
-    "start": "Welcome to Calculator!",
-    "first": "What's the first number? ",
-    "invalid_num": "That doesn't look like a valid number! Try again?",
-    "second": "What's the second number? ",
-    "select": "Select a number for the operation you would like to perform\n1) Add 2) Subtract 3) Multiply 4) Divide",
-    "invalid_select": "Please choose 1, 2, 3, or 4!",
-    "result": "The result is: ",
-    "again": "Do you want to perform more calculations?\nPlease select 'y' or 'n'."
+    "en": {
+        "start": "Welcome to Calculator!",
+        "invalid_language": "Try either 'english' or 'francais'!\nEssayez « english » ou « francais »!",
+        "first": "What's the first number? ",
+        "invalid_num": "That doesn't look like a valid number! Try again?",
+        "second": "What's the second number? ",
+        "select": "Select a number for the operation you would like to perform\n1) Add 2) Subtract 3) Multiply 4) Divide",
+        "invalid_select": "Please choose 1, 2, 3, or 4!",
+        "result": "The result is: ",
+        "again": "Do you want to perform more calculations?\nPlease select 'y' or 'n'."
+        },
+    "fr": {
+        "start": "Bienvenue sur Calculatrice!",
+        "first": "Quel est le premier numero? ",
+        "invalid_num": "Cela ne ressemble pas a un numero valide! Essayer a nouveau?",
+        "second": "Quel est le deuxieme numero? ",
+        "select": "Sélectionnez un nombre pour l'opération que vous souhaitez effectuer\n1) Ajouter 2) Soustraire 3) Multiplier 4) Diviser",
+        "invalid_select": "Veuillez choisir 1, 2, 3 ou 4 !",
+        "result": "Le résultat est: ",
+        "again": "Voulez-vous effectuer plus de calculs ?\nVeuillez sélectionner « y » ou « n »."
+    }
 }
