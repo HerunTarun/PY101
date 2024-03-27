@@ -13,17 +13,17 @@ def invalid_number(number_str):
 def language_choice():
     language = 'en'
     prompt("Choose a language: english or francais")
-    language = input().strip()
+    language = input().strip().lower()
 
     while language not in ['english', 'francais']:
         prompt("Try either 'english' or 'francais'!\n"
            "Essayez « english » ou « francais »!")
-        language = input().strip()
+        language = input().strip().lower()
 
     match language:
-        case 'english':
+        case 'english' or 'en':
             language = 'en'
-        case 'francais':
+        case 'francais' or 'fr':
             language = 'fr'
 
     return language
@@ -97,3 +97,19 @@ while True:
 # X error response for invalid language selection rather than case _
 # X divide by zero error
 # X accounting for white space in input
+
+
+# Review - UI
+# clarify how language can be chosen
+# allow abbreviated, upper and lower case inputs for language
+# fix lack of prompt on error message for language. 
+# add examples to prompts
+# add visualization to final operation
+# clear the screen after each calculation
+# add goodbye message
+
+# Review - Source Code
+# fix language = en
+# rename functions to have verbs so that they describe an action
+# add more helper functions for retry, match/case, and operators
+# remove improvements comments when done with your code
