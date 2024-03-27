@@ -88,7 +88,7 @@ def make_calculation(number1, number2, operation):
     return output, operation
 
 
-def main():
+def calculate():
     number1, number2 = obtaining_numbers()
 
     operation = obtaining_operation()
@@ -112,7 +112,7 @@ with open ('calculator_messages.json', 'r') as file:
 prompt(data['start'])
 
 while True:
-    main()
+    calculate()
 
     if not prompt_play_again():
         break
