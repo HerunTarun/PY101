@@ -1,29 +1,33 @@
 import json
+import os
 
 def prompt(message):
     print(f'==> {message}')
 
-def invalid_number(number_str):
+def check_invalid_number(number_str):
     try:
         float(number_str)
     except ValueError:
         return True
     return False
 
-def language_choice():
-    language = 'en'
-    prompt("Choose a language: english or francais")
+def choose_language():
+    prompt("Please enter 'en' for english and 'fr' for francais")
     language = input().strip().lower()
 
-    while language not in ['english', 'francais']:
-        prompt("Try either 'english' or 'francais'!\n"
-           "Essayez « english » ou « francais »!")
+    while language.lower() not in ['english', 'francais', 'en', 'fr']:
+        prompt("Try either 'english' or 'francais'!")
+        prompt("Essayez « english » ou « francais »!")
         language = input().strip().lower()
 
     match language:
-        case 'english' or 'en':
+        case 'english':
             language = 'en'
-        case 'francais' or 'fr':
+        case 'en':
+            language = 'en'
+        case 'francais':
+            language = 'fr'
+        case 'fr':
             language = 'fr'
 
     return language
@@ -32,29 +36,27 @@ def obtaining_numbers():
     prompt(data['first'])
     number1 = input().strip()
 
-    while invalid_number(number1):
+    while check_invalid_number(number1):
         prompt(data['invalid_num'])
         number1 = input().strip()
 
     prompt(data['second'])
     number2 = input().strip()
 
-    while invalid_number(number2):
+    while check_invalid_number(number2):
         prompt(data['invalid_num'])
         number2 = input().strip()
 
     return number1, number2
 
-def invalid_division(num1, num2):
+def check_invalid_division(num1, num2):
     try:
         float(num1) / float(num2)
     except ZeroDivisionError:
         return True
     return False
 
-def the_calculator():
-    number1, number2 = obtaining_numbers()
-
+def obtaining_operation():
     prompt(data['select'])
     operation = input().strip()
 
@@ -62,54 +64,57 @@ def the_calculator():
         prompt(data['invalid_select'])
         operation = input().strip()
 
+    return operation
+
+def make_calculation(number1, number2, operation):
     match operation:
         case '1':     # 1 represents addition
             output = float(number1) + float(number2)
+            operation = "+"
         case '2':     # 2 represents subtraction
             output = float(number1) - float(number2)
+            operation = "-"
         case '3':      # 3 represents multiplication
             output = float(number1) * float(number2)
+            operation = "*"
         case '4':      # 4 represents division
-            while invalid_division(number1, number2):
+            while check_invalid_division(number1, number2):
                 prompt(data['invalid_division'])
                 number1, number2 = obtaining_numbers()
 
             output = float(number1) / float(number2)
+            operation = "/"
 
-    prompt(data['result'] + f'{output:.2f}')
+    return output, operation
+
+
+def main():
+    number1, number2 = obtaining_numbers()
+
+    operation = obtaining_operation()
+
+    output, operation = make_calculation(number1, number2, operation)
+
+    prompt(f'{number1} {operation} {number2} = {output:.2f}')
+
+def prompt_play_again():
+    prompt(data['again'])
+    retry = input()
+    if retry != 'y':
+        prompt(data['bye'])
+        return False
+
+    return True
 
 with open ('calculator_messages.json', 'r') as file:
-    data = json.load(file)[language_choice()]
+    data = json.load(file)[choose_language()]
 
 prompt(data['start'])
 
 while True:
-    the_calculator()
+    main()
 
-    prompt(data['again'])
-
-    retry = input()
-    if retry != 'y':
+    if not prompt_play_again():
         break
 
-
-# Improvements
-# X error response for invalid language selection rather than case _
-# X divide by zero error
-# X accounting for white space in input
-
-
-# Review - UI
-# clarify how language can be chosen
-# allow abbreviated, upper and lower case inputs for language
-# fix lack of prompt on error message for language. 
-# add examples to prompts
-# add visualization to final operation
-# clear the screen after each calculation
-# add goodbye message
-
-# Review - Source Code
-# fix language = en
-# rename functions to have verbs so that they describe an action
-# add more helper functions for retry, match/case, and operators
-# remove improvements comments when done with your code
+    os.system('clear')
