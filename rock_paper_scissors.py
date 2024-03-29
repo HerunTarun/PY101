@@ -1,35 +1,38 @@
 import random
 
-VALID_CHOICES = ['rock', 'paper', 'scissors']
+VALID_CHOICES = ['rock', 'paper', 'scissors', 'lizard', 'spock']
 
 def prompt(message):
     print(f'==> {message}')
 
-def display_winner():
-    if ((choice == 'rock' and computer_choice == 'scissors') or
-        (choice == 'rock' and computer_choice == 'lizard') or
-        (choice == 'scissors' and computer_choice == 'paper') or
-        (choice == 'scissors' and computer_choice == 'lizard') or
-        (choice == 'paper' and computer_choice == 'rock') or
-        (choice == 'paper' and computer_choice == 'spock') or
-        (choice == 'lizard' and computer_choice == 'spock') or
-        (choice == 'lizard' and computer_choice == 'paper') or
-        (choice == 'spock' and computer_choice == 'scissors') or
-        (choice == 'spock' and computer_choice == 'rock')):
-            prompt('You win!')
-    elif ((choice == 'rock' and computer_choice == 'paper') or
-        (choice == 'rock' and computer_choice == 'spock') or
-        (choice == 'scissors' and computer_choice == 'rock') or
-        (choice == 'scissors' and computer_choice == 'spock') or
-        (choice == 'paper' and computer_choice == 'lizard') or
-        (choice == 'paper' and computer_choice == 'scissors') or
-        (choice == 'lizard' and computer_choice == 'rock') or
-        (choice == 'lizard' and computer_choice == 'scissors') or
-        (choice == 'spock' and computer_choice == 'lizard') or
-        (choice == 'spock' and computer_choice == 'paper')):
-            prompt('Computer wins!')
-    else:
-        prompt("It's a tie!")
+def display_winner(choice, computer_choice):
+    prompt(calculate_winner(choice, computer_choice))
+
+def calculate_winner(choice, computer_choice):
+    if choice == computer_choice:
+        return "It's a tie!"
+    match choice:
+        case 'rock':
+            if computer_choice in ['scissors, lizard']:
+                return 'winner'
+            return 'loser'
+        case 'scissors':
+            if computer_choice in ['paper, lizard']:
+                return 'winner'
+            return 'loser'            
+        case 'paper':
+            if computer_choice in ['rock, spock']:
+                return 'winner'
+            return 'loser'
+        case 'lizard':
+            if computer_choice in ['spock, paper']:
+                return 'winner'
+            return 'loser'
+        case 'spock':
+            if computer_choice in ['scissors, rock']:
+                return 'winner'
+            return 'loser'
+
 
 while True:
     prompt(f'Choose one: {", ".join(VALID_CHOICES)}')
@@ -42,7 +45,7 @@ while True:
 
     prompt(f'You chose {choice}, computer chose {computer_choice}')
 
-    display_winner()
+    display_winner(choice, computer_choice)
 
     prompt("Do you want to play again (y/n)?")
     answer = input().lower()
