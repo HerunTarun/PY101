@@ -150,24 +150,3 @@ while True:
     prompt(messages['retry'])
     if not redo_mortgage_calculation():
         break
-
-
-# TODO
-# X Convert all input to float
-# X clean up loan amount to remove commas when converting to float
-# X input validation to disallow negative numbers in loan amount and apr
-# X fix calculation
-# X check clarity of prompts e.g. examples
-# X add visualization for final calculation
-# X add goodbye message
-# X ensure function names are verbs
-# X add multi-duration functionality
-# X fix input validation for unit
-# X fix final calculation visualization to account for year or months
-# X abstract away interest factor calculation
-# X add 0 interest loan functionality
-# remove todo comments when done with code
-# clean up for pylint
-
-
-# Improvements
