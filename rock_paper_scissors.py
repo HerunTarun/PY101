@@ -15,27 +15,35 @@ def prompt(message):
 
 def print_welcome():
     # add welcoming message and description
+    prompt(messages['welcome'])
+    prompt(messages['game_rules'])
 
 def obtain_input():
     # add input
+    prompt('placeholder')
 
 def check_input():
     # add input validation
+    prompt('plcaeholder')
 
 def calculate_winner(choice, computer_choice):
     if choice == computer_choice:
-        return "It's a tie!"
+        return messages['tie']
 
     if computer_choice in WINNING_COMBINATIONS[choice]:
-        return 'You win!'
+        return messages['win']
         
-    return 'Aww, you lose!'
+    return messages{'lose']
 
 def print_winner(choice, computer_choice):
     prompt(calculate_winner(choice, computer_choice))
 
 def play_again():
     # add play again function
+    prompt('placeholder')
+
+with open('rps_messages.json', 'r') as file:
+    messages = json.load(file)
 
 while True:
     print_welcome()
@@ -65,9 +73,11 @@ while True:
         break
     
 # TODO
-# Add clear screen
 # X restructure program to use functions
+# add json file for messages
+# Add clear screen
 # add goodbye message
+# add help function
 # add shortened input bonus feature
 # add best of five bonus feature
 # clear todo when done with code

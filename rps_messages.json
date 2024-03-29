@@ -1,0 +1,9 @@
+{
+    "welcome": "Welcome to Rock, Paper, Scissors, Lizard, Spock",
+    "game_rules": "The rules are simple. Scissors cuts paper, paper covers rock,\nrock crushes lizard, lizard poisons Spock, Spock smashes scissors, \nscissors decapitates lizard, lizard eats paper, paper disproves Spock, \nSpock vaporizes rock, and as it always has, rock crushes scissors",
+    "match_rules": "",
+    "win": "",
+    "lose": "",
+    "tie": ""
+    
+}
