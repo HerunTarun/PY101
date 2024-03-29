@@ -99,7 +99,6 @@ def calculate_interest_factor(apr, duration, unit):
         return 1 / float(duration)
 
     monthly_rate =  (float(apr)/100) / MONTHS_IN_YEAR
-
     interest_denominator = 1 - (1 + monthly_rate) ** (-float(duration))
 
     return monthly_rate / interest_denominator
