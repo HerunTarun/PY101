@@ -77,11 +77,10 @@ def check_valid_unit(unit_str):
 
     if str(unit_str) in ['y', 'm',]:
         return False
-    elif str(unit_str) in ['nan', 'inf', '']:
+
+    if str(unit_str) in ['nan', 'inf', '']:
         prompt(messages['funny_input'])
         return True
-    else:
-        return False
 
     return False
 
@@ -92,14 +91,19 @@ def calculate_monthly_payment(loan_amount, apr, duration, unit):
     return monthly_payment
 
 def calculate_interest_factor(apr, duration, unit):
-    monthly_rate =  (float(apr)/100) / MONTHS_IN_YEAR
     if unit != 'm':
         duration = float(duration)
         duration *= MONTHS_IN_YEAR
+
+    if float(apr) == 0:
+        return 1 / float(duration)
+
+    monthly_rate =  (float(apr)/100) / MONTHS_IN_YEAR
+
     interest_denominator = 1 - (1 + monthly_rate) ** (-float(duration))
 
     return monthly_rate / interest_denominator
-    
+
 def print_monthly_payment():
     loan_amount = obtain_loan()
     apr = obtain_apr()
@@ -121,13 +125,13 @@ def format_unit_in_payment(unit, duration):
         case 'y':
             if float(duration) == 1:
                 return 'year'
-            else:
-                return 'years'
+
+            return 'years'
         case 'm':
             if float(duration) == 1:
                 return 'month'
-            else:
-                return 'months'
+
+            return 'months'
 
 def redo_mortgage_calculation():
     retry = input()
@@ -161,7 +165,7 @@ while True:
 # X fix input validation for unit
 # X fix final calculation visualization to account for year or months
 # X abstract away interest factor calculation
-# add 0 interest loan functionality
+# X add 0 interest loan functionality
 # remove todo comments when done with code
 # clean up for pylint
 
