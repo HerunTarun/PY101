@@ -11,28 +11,25 @@ def display_winner(choice, computer_choice):
 def calculate_winner(choice, computer_choice):
     if choice == computer_choice:
         return "It's a tie!"
+
     match choice:
         case 'rock':
             if computer_choice in ['scissors, lizard']:
                 return 'winner'
-            return 'loser'
         case 'scissors':
             if computer_choice in ['paper, lizard']:
                 return 'winner'
-            return 'loser'            
         case 'paper':
             if computer_choice in ['rock, spock']:
                 return 'winner'
-            return 'loser'
         case 'lizard':
             if computer_choice in ['spock, paper']:
                 return 'winner'
-            return 'loser'
         case 'spock':
             if computer_choice in ['scissors, rock']:
                 return 'winner'
-            return 'loser'
 
+    return 'loser'
 
 while True:
     prompt(f'Choose one: {", ".join(VALID_CHOICES)}')
