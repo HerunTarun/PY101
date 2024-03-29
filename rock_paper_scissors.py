@@ -1,7 +1,12 @@
 import random
 
 VALID_CHOICES = ['rock', 'paper', 'scissors', 'lizard', 'spock']
-
+WINNING_COMBINATIONS = {'rock': ['scissors', 'lizard'],
+                        'scissors': ['paper', 'lizard'],
+                        'paper': ['rock', 'spock'],
+                        'lizard': ['spock', 'paper'],
+                        'spock': ['scissors', 'rock']
+}
 def prompt(message):
     print(f'==> {message}')
 
@@ -12,23 +17,9 @@ def calculate_winner(choice, computer_choice):
     if choice == computer_choice:
         return "It's a tie!"
 
-    match choice:
-        case 'rock':
-            if computer_choice in ['scissors, lizard']:
-                return 'winner'
-        case 'scissors':
-            if computer_choice in ['paper, lizard']:
-                return 'winner'
-        case 'paper':
-            if computer_choice in ['rock, spock']:
-                return 'winner'
-        case 'lizard':
-            if computer_choice in ['spock, paper']:
-                return 'winner'
-        case 'spock':
-            if computer_choice in ['scissors, rock']:
-                return 'winner'
-
+    if computer_choice in WINNING_COMBINATIONS[choice]:
+        return 'winner'
+        
     return 'loser'
 
 while True:
