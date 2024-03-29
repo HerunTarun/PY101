@@ -7,12 +7,26 @@ def prompt(message):
 
 def display_winner():
     if ((choice == 'rock' and computer_choice == 'scissors') or
+        (choice == 'rock' and computer_choice == 'lizard') or
         (choice == 'scissors' and computer_choice == 'paper') or
-        (choice == 'paper' and computer_choice == 'rock')):
+        (choice == 'scissors' and computer_choice == 'lizard') or
+        (choice == 'paper' and computer_choice == 'rock') or
+        (choice == 'paper' and computer_choice == 'spock') or
+        (choice == 'lizard' and computer_choice == 'spock') or
+        (choice == 'lizard' and computer_choice == 'paper') or
+        (choice == 'spock' and computer_choice == 'scissors') or
+        (choice == 'spock' and computer_choice == 'rock')):
             prompt('You win!')
     elif ((choice == 'rock' and computer_choice == 'paper') or
+        (choice == 'rock' and computer_choice == 'spock') or
         (choice == 'scissors' and computer_choice == 'rock') or
-        (choice == 'paper' and computer_choice == 'scissors')):
+        (choice == 'scissors' and computer_choice == 'spock') or
+        (choice == 'paper' and computer_choice == 'lizard') or
+        (choice == 'paper' and computer_choice == 'scissors') or
+        (choice == 'lizard' and computer_choice == 'rock') or
+        (choice == 'lizard' and computer_choice == 'scissors') or
+        (choice == 'spock' and computer_choice == 'lizard') or
+        (choice == 'spock' and computer_choice == 'paper')):
             prompt('Computer wins!')
     else:
         prompt("It's a tie!")
