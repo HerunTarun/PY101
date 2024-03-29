@@ -11,7 +11,7 @@
     "obtain_mortgage_duration_years": "Please enter the duration of mortgage as a number in years e.g 5, not 5 years:",
     "obtain_mortgage_duration_months": "Please enter the duration of mortgage as a number in months e.g 5, not 5 months:",
     "invalid_duration_input": "Please enter a valid duration!",
-    "payment": "Your monthly payment for a mortgage amount of ${loan_amount} at an APR of {apr}% for {duration} months is ${monthly_payment:.2f}",
+    "payment": "Your monthly payment for a mortgage amount of ${loan_amount} at an APR of {apr}% for {duration} {unit} is ${monthly_payment:.2f}",
     "retry": "Would you like to make another calculation? Please enter 'y' or 'n'",
     "goodbye": "Thank you for using the Mortgage Calculator. Have a nice day!"
 }

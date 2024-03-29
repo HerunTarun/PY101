@@ -1,6 +1,8 @@
 import json
 import os
 
+MONTHS_IN_YEAR = 12
+
 def prompt(message):
     print(f'==> {message}')
 
@@ -38,11 +40,11 @@ def obtain_duration():
 def choose_mortgage_duration_unit():
     prompt(messages['choose_mortgage_duration_unit_1'])
     prompt(messages['choose_mortgage_duration_unit_2'])
-    unit = input()
+    unit = input().lower()
 
     while check_valid_unit(unit):
         prompt(messages['invalid_mortgage_unit'])
-        unit = input()
+        unit = input().lower()
 
     return unit
 
@@ -75,22 +77,29 @@ def check_valid_unit(unit_str):
 
     if str(unit_str) in ['y', 'm',]:
         return False
-
-    if str(unit_str) in ['nan', 'inf', '']:
+    elif str(unit_str) in ['nan', 'inf', '']:
         prompt(messages['funny_input'])
         return True
+    else:
+        return False
 
     return False
 
 def calculate_monthly_payment(loan_amount, apr, duration, unit):
-    monthly_rate =  (float(apr)/100) / 12
-    if unit != 'm':
-        duration = float(duration)
-        duration *= 12
-    interest_factor = 1 - (1 + monthly_rate) ** (-float(duration))
-    monthly_payment = float(loan_amount) * (monthly_rate / interest_factor)
+    interest_factor = calculate_interest_factor(apr, duration, unit)
+    monthly_payment = float(loan_amount) * interest_factor
+
     return monthly_payment
 
+def calculate_interest_factor(apr, duration, unit):
+    monthly_rate =  (float(apr)/100) / MONTHS_IN_YEAR
+    if unit != 'm':
+        duration = float(duration)
+        duration *= MONTHS_IN_YEAR
+    interest_denominator = 1 - (1 + monthly_rate) ** (-float(duration))
+
+    return monthly_rate / interest_denominator
+    
 def print_monthly_payment():
     loan_amount = obtain_loan()
     apr = obtain_apr()
@@ -99,11 +108,26 @@ def print_monthly_payment():
                                                 apr,
                                                 duration,
                                                 unit)
+    unit = format_unit_in_payment(unit, duration)
 
     prompt(messages['payment'].format(monthly_payment = monthly_payment,
                                   loan_amount = loan_amount,
                                   apr = apr,
+                                  unit = unit,
                                   duration = duration))
+
+def format_unit_in_payment(unit, duration):
+    match unit:
+        case 'y':
+            if float(duration) == 1:
+                return 'year'
+            else:
+                return 'years'
+        case 'm':
+            if float(duration) == 1:
+                return 'month'
+            else:
+                return 'months'
 
 def redo_mortgage_calculation():
     retry = input()
@@ -134,6 +158,9 @@ while True:
 # X add goodbye message
 # X ensure function names are verbs
 # X add multi-duration functionality
+# X fix input validation for unit
+# X fix final calculation visualization to account for year or months
+# X abstract away interest factor calculation
 # add 0 interest loan functionality
 # remove todo comments when done with code
 # clean up for pylint
