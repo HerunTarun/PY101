@@ -75,7 +75,7 @@ while True:
 # TODO
 # X restructure program to use functions
 # add json file for messages
-# Add clear screen
+# Add clear screen at start of program and at replay
 # add goodbye message
 # add help function
 # add shortened input bonus feature
