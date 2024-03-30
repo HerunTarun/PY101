@@ -161,30 +161,34 @@ def print_monthly_payment():
                                   unit = unit,
                                   duration = duration))
 
-def redo_calculation():
+def repeat_program():
     retry = input()
     while retry.lower() not in ['y', 'yes']:
         return False
     os.system('clear')
     return True
 
+def start_program():
+    os.system('clear')
+    prompt(messages['start'])
+    while True:
+        print_monthly_payment()
+        prompt(messages['retry'])
+        if not redo_calculation():
+            prompt(messages['goodbye'])
+            break
+
+
+
 with open('mortgagecalc_messages.json', 'r') as file:
     messages = json.load(file)
 
-while True:
-    os.system('clear')
-    prompt(messages['start'])
-    print_monthly_payment()
-    prompt(messages['retry'])
-    if not redo_calculation():
-        prompt(messages['goodbye'])
-        break
-
+start_program()
 
 
 # TODO
 # X add clear screen at beginning of program
-# fix input validation for loan amount and duration
+# X fix input validation for loan amount and duration
 # X add function for negative number
 # X add function for invalid number
 # X fix input validation for years/months
