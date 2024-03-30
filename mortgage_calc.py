@@ -144,6 +144,7 @@ with open('mortgagecalc_messages.json', 'r') as file:
     messages = json.load(file)
 
 while True:
+    os.system('clear')
     prompt(messages['start'])
     print_monthly_payment()
     prompt(messages['retry'])
@@ -153,6 +154,7 @@ while True:
 
 
 # TODO
+# add clear screen at beginning of program
 # fix input validation for loan amount and duration
 # fix input validation for years/months
 # change check_valid function name
