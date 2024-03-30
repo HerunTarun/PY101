@@ -14,16 +14,18 @@ def prompt(message):
     print(f'==> {message}')
 
 def print_welcome():
-    # add welcoming message and description
-    prompt(messages['welcome'])
-    prompt(messages['game_rules'])
+    print(messages['welcome'])
+    print(messages['game_rules'])
 
-def obtain_input():
+def obtain_user_choice():
     # add input
     prompt('placeholder')
 
 def is_invalid_input():
     # add input validation
+    prompt('placeholder')
+
+def generate_computer_choice():
     prompt('placeholder')
 
 def calculate_winner(choice, computer_choice):
@@ -33,7 +35,7 @@ def calculate_winner(choice, computer_choice):
     if computer_choice in WINNING_COMBINATIONS[choice]:
         return messages['win']
         
-    return messages{'lose']
+    return messages['lose']
 
 def print_winner(choice, computer_choice):
     prompt(calculate_winner(choice, computer_choice))
