@@ -2,7 +2,8 @@ import json
 import random
 import os
 
-VALID_CHOICES = ['rock', 'paper', 'scissors', 'lizard', 'spock']
+VALID_CHOICES = {'long': ['rock', 'paper', 'scissors', 'lizard', 'spock'], 
+                 'short': ['r', 'p', 's', 'l', 'k']}
 WINNING_COMBINATIONS = {'rock': ['scissors', 'lizard'],
                         'scissors': ['paper', 'lizard'],
                         'paper': ['rock', 'spock'],
@@ -21,26 +22,49 @@ def print_welcome():
     prompt(messages['game_rules'])
 
 def obtain_user_choice():
-    print(f'Choose one: {", ".join(VALID_CHOICES)}')
+    print(f'Choose one: {", ".join(VALID_CHOICES["long"])} or {", ".join(VALID_CHOICES["short"])}')
+    
     choice = input()
-    while choice not in VALID_CHOICES:
-        print("That's not a valid choice")
+    while is_invalid_input(choice):
+        prompt(messages['invalid_input'])
         choice = input()
 
+    choice = reformat_user_choice(choice)
     return choice
 
-def is_invalid_input():
-    # add input validation
-    prompt('placeholder')
+def is_invalid_input(choice):
+    if choice not in VALID_CHOICES['long'] and VALID_CHOICES['short']:
+        return True
+
+    return False
+
+def reformat_user_choice(choice):
+    if choice in VALID_CHOICES['long']:
+        return choice
+    
+    match choice:
+        case 'r':
+            choice = 'rock'
+        case 'p':
+            choice = 'paper'
+        case 's':
+            choice = 'scissors'
+        case 'l'
+            choice = 'lizard'
+        case 'k':
+            choice = 'spock'
+    
+    return choice
 
 def generate_computer_choice():
-    computer_choice = random.choice(VALID_CHOICES)
+    computer_choice = random.choice(VALID_CHOICES['long'])
     
     return computer_choice
 
 def calculate_winner():
     choice = obtain_user_choice()
     computer_choice = generate_computer_choice()
+    
     
     if choice == computer_choice:
         return messages['tie'].format(choice = choice, 
@@ -68,7 +92,7 @@ def start_game():
     print_welcome()
     while True:
         print_winner()
-        prompt("Do you want to play again (y/n)?")
+        prompt(messages['replay'])
         if not play_again():
             print(messages['goodbye'])
             break

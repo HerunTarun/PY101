@@ -2,9 +2,11 @@
     "welcome": "Welcome to Rock, Paper, Scissors, Lizard, Spock. You'll be playing against Ember. Ember isn't very good at this game, see if you can beat her!",
     "game_rules": "Help\nThe rules are simple. Scissors cuts paper, paper covers rock, rock crushes lizard, lizard poisons Spock, Spock smashes scissors, scissors decapitates lizard, lizard eats paper, paper disproves Spock, Spock vaporizes rock, and as it always has, rock crushes scissors.",
     "match_rules": "",
-    "win": "You chose {choice}, computer chose {computer_choice}\nYou won! Ember is considering renaming herself to Spark",
-    "lose": "You chose {choice}, computer chose {computer_choice}\nAww, you lost! Ember thinks it's time she became Flame",
-    "tie": "You chose {choice}, computer chose {computer_choice}\nIt's a tie! Ember wants to play again!",
+    "invalid_input": "That won't work. Try 'rock', 'paper', 'scissors', 'lizard', or 'spock'!",
+    "win": "You chose {choice}, Ember chose {computer_choice}\nYou won! Ember is considering renaming herself to Spark",
+    "lose": "You chose {choice}, Ember chose {computer_choice}\nAww, you lost! Ember thinks it's time she became Flame",
+    "tie": "You chose {choice}, Ember chose {computer_choice}\nIt's a tie! Ember wants to play again!",
+    "replay": "Do you want to play Ember again? Enter 'y' or 'n'!",
     "goodbye": "Ember says 'see you later!'"
     
 }
