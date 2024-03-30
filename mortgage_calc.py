@@ -174,7 +174,7 @@ def start_program():
     while True:
         print_monthly_payment()
         prompt(messages['retry'])
-        if not redo_calculation():
+        if not repeat_program():
             prompt(messages['goodbye'])
             break
 
@@ -184,15 +184,3 @@ with open('mortgagecalc_messages.json', 'r') as file:
     messages = json.load(file)
 
 start_program()
-
-
-# TODO
-# X add clear screen at beginning of program
-# X fix input validation for loan amount and duration
-# X add function for negative number
-# X add function for invalid number
-# X fix input validation for years/months
-# X change check_valid function name
-# X rename print monthly to start_program
-# X de-load redo_calc functions
-
