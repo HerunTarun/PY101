@@ -178,8 +178,6 @@ def start_program():
             prompt(messages['goodbye'])
             break
 
-
-
 with open('mortgagecalc_messages.json', 'r') as file:
     messages = json.load(file)
 
