@@ -16,14 +16,14 @@ def prompt(message):
 
 def game_rules():
     prompt('placeholder')
-    
+
 def print_welcome():
     prompt(messages['welcome'])
     prompt(messages['game_rules'])
 
 def obtain_user_choice():
-    print(f'Choose one: {", ".join(VALID_CHOICES["long"])} or {", ".join(VALID_CHOICES["short"])}')
-    
+    prompt(messages['user_input'])
+
     choice = input()
     while is_invalid_input(choice):
         prompt(messages['invalid_input'])
@@ -33,7 +33,11 @@ def obtain_user_choice():
     return choice
 
 def is_invalid_input(choice):
-    if choice not in VALID_CHOICES['long'] and VALID_CHOICES['short']:
+    total_valid_inputs = []
+    for inputs in VALID_CHOICES.values():
+        total_valid_inputs += inputs
+    
+    if choice not in total_valid_inputs:
         return True
 
     return False
@@ -41,31 +45,30 @@ def is_invalid_input(choice):
 def reformat_user_choice(choice):
     if choice in VALID_CHOICES['long']:
         return choice
-    
+
     match choice:
         case 'r':
-            choice = 'rock'
+            choice = VALID_CHOICES["long"][0]
         case 'p':
-            choice = 'paper'
+            choice = VALID_CHOICES["long"][1]
         case 's':
-            choice = 'scissors'
-        case 'l'
-            choice = 'lizard'
+            choice = VALID_CHOICES["long"][2]
+        case 'l':
+            choice = VALID_CHOICES["long"][3]
         case 'k':
-            choice = 'spock'
-    
+            choice = VALID_CHOICES["long"][4]
+
     return choice
 
 def generate_computer_choice():
     computer_choice = random.choice(VALID_CHOICES['long'])
-    
+
     return computer_choice
 
 def calculate_winner():
     choice = obtain_user_choice()
     computer_choice = generate_computer_choice()
-    
-    
+
     if choice == computer_choice:
         return messages['tie'].format(choice = choice, 
                                      computer_choice = computer_choice)
@@ -73,7 +76,7 @@ def calculate_winner():
     if computer_choice in WINNING_COMBINATIONS[choice]:
         return messages['win'].format(choice = choice, 
                                       computer_choice = computer_choice)
-        
+
     return messages['lose'].format(choice = choice, 
                                    computer_choice = computer_choice)
 
