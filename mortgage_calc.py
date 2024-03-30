@@ -79,7 +79,7 @@ def is_zero_input(number):
 def is_invalid_loan_amount(number):
     if is_invalid_input(number) or is_zero_input(number):
         return True
-    
+
     return False
 
 def is_invalid_apr(number):
@@ -91,7 +91,7 @@ def is_invalid_apr(number):
 def is_invalid_duration(number):
     if is_invalid_input(number) or is_zero_input(number):
         return True
-    
+
     return False
 
 def is_invalid_unit(unit_str):
@@ -109,12 +109,6 @@ def is_invalid_unit(unit_str):
 
     return False
 
-def calculate_monthly_payment(loan_amount, apr, duration, unit):
-    interest_factor = calculate_interest_factor(apr, duration, unit)
-    monthly_payment = float(loan_amount) * interest_factor
-
-    return monthly_payment
-
 def calculate_interest_factor(apr, duration, unit):
     if unit != 'm':
         duration = float(duration)
@@ -128,7 +122,13 @@ def calculate_interest_factor(apr, duration, unit):
 
     return monthly_rate / interest_denominator
 
-def main():
+def calculate_monthly_payment(loan_amount, apr, duration, unit):
+    interest_factor = calculate_interest_factor(apr, duration, unit)
+    monthly_payment = float(loan_amount) * interest_factor
+
+    return monthly_payment
+
+def obtain_loan_details():
     loan_amount = obtain_loan()
     apr = obtain_apr()
     duration, unit = obtain_duration()
@@ -136,6 +136,23 @@ def main():
                                                 apr,
                                                 duration,
                                                 unit)
+
+    return loan_amount, apr, duration, unit, monthly_payment
+
+def format_unit_in_payment(unit, duration):
+    match unit:
+        case 'y':
+            if float(duration) == 1:
+                return 'year'
+            return 'years'
+        case 'm':
+            if float(duration) == 1:
+                return 'month'
+            return 'months'
+
+def print_monthly_payment():
+    loan_amount, apr, duration, unit, monthly_payment = obtain_loan_details()
+
     unit = format_unit_in_payment(unit, duration)
 
     prompt(messages['payment'].format(monthly_payment = monthly_payment,
@@ -143,19 +160,6 @@ def main():
                                   apr = apr,
                                   unit = unit,
                                   duration = duration))
-
-def format_unit_in_payment(unit, duration):
-    match unit:
-        case 'y':
-            if float(duration) == 1:
-                return 'year'
-
-            return 'years'
-        case 'm':
-            if float(duration) == 1:
-                return 'month'
-
-            return 'months'
 
 def redo_calculation():
     retry = input()
@@ -170,7 +174,7 @@ with open('mortgagecalc_messages.json', 'r') as file:
 while True:
     os.system('clear')
     prompt(messages['start'])
-    main()
+    print_monthly_payment()
     prompt(messages['retry'])
     if not redo_calculation():
         prompt(messages['goodbye'])
@@ -181,11 +185,10 @@ while True:
 # TODO
 # X add clear screen at beginning of program
 # fix input validation for loan amount and duration
-# add function for negative number
-# add function for invalid number
+# X add function for negative number
+# X add function for invalid number
 # X fix input validation for years/months
 # X change check_valid function name
-# rename print monthly to start_program
-# nest functions inside functions
+# X rename print monthly to start_program
 # X de-load redo_calc functions
 
