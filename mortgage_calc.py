@@ -100,7 +100,7 @@ def is_invalid_unit(unit_str):
     except ValueError:
         return True
 
-    if str(unit_str) not in ['y', 'm',]:
+    if str(unit_str) not in ['y', 'm']:
         return True
 
     if str(unit_str) in ['nan', 'inf', '']:
