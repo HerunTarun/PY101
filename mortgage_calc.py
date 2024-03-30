@@ -10,7 +10,7 @@ def obtain_loan():
     prompt(messages['obtain_loan_amount'])
     loan_amount = input().replace(',', '')
 
-    while check_valid_number(loan_amount):
+    while valid_number(loan_amount):
         prompt(messages['invalid_loan_input'])
         loan_amount = input().replace(',', '')
 
@@ -20,7 +20,7 @@ def obtain_apr():
     prompt(messages['obtain_apr'])
     apr = input()
 
-    while check_valid_number(apr):
+    while valid_number(apr):
         prompt(messages['invalid_apr_input'])
         apr = input()
 
@@ -31,7 +31,7 @@ def obtain_duration():
     prompt(choose_mortgage_duration_prompt(unit))
     mortgage_duration = input()
 
-    while check_valid_number(mortgage_duration):
+    while valid_number(mortgage_duration):
         prompt(messages['invalid_duration_input'])
         mortgage_duration = input()
 
@@ -42,7 +42,7 @@ def choose_mortgage_duration_unit():
     prompt(messages['choose_mortgage_duration_unit_2'])
     unit = input().lower()
 
-    while check_valid_unit(unit):
+    while valid_unit(unit):
         prompt(messages['invalid_mortgage_unit'])
         unit = input().lower()
 
@@ -55,7 +55,7 @@ def choose_mortgage_duration_prompt(unit):
         case 'm':
             return messages['obtain_mortgage_duration_months']
 
-def check_valid_number(number):
+def valid_number(number):
     try:
         float(number)
     except ValueError:
@@ -66,17 +66,19 @@ def check_valid_number(number):
         return True
     if float(number) < 0:
         return True
+    if float(number) == 0:
+        return False
 
     return False
 
-def check_valid_unit(unit_str):
+def valid_unit(unit_str):
     try:
         str(unit_str)
     except ValueError:
         return True
 
-    if str(unit_str) in ['y', 'm',]:
-        return False
+    if str(unit_str) not in ['y', 'm',]:
+        return True
 
     if str(unit_str) in ['nan', 'inf', '']:
         prompt(messages['funny_input'])
@@ -132,10 +134,9 @@ def format_unit_in_payment(unit, duration):
 
             return 'months'
 
-def redo_mortgage_calculation():
+def redo_calculation():
     retry = input()
     while retry.lower() not in ['y', 'yes']:
-        prompt(messages['goodbye'])
         return False
     os.system('clear')
     return True
@@ -148,15 +149,17 @@ while True:
     prompt(messages['start'])
     print_monthly_payment()
     prompt(messages['retry'])
-    if not redo_mortgage_calculation():
+    if not redo_calculation():
+        prompt(messages['goodbye'])
         break
 
 
 
 # TODO
-# add clear screen at beginning of program
+# X add clear screen at beginning of program
 # fix input validation for loan amount and duration
-# fix input validation for years/months
-# change check_valid function name
-# de-load print_monthly and redo_calc functions
+# X fix input validation for years/months
+# X change check_valid function name
+# de-load print_monthly 
+# de-load redo_calc functions
 
