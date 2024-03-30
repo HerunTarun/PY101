@@ -15,11 +15,13 @@ def prompt(message):
     print(f'==> {message}')
 
 def game_rules():
-    prompt('placeholder')
+    prompt(messages['game_rules'])
 
 def print_welcome():
     prompt(messages['welcome'])
-    prompt(messages['game_rules'])
+    prompt(messages['ember_intro'])
+    game_rules()
+    prompt(messages['match_rules'])
 
 def obtain_user_choice():
     prompt(messages['user_input'])
@@ -36,7 +38,7 @@ def is_invalid_input(choice):
     total_valid_inputs = []
     for inputs in VALID_CHOICES.values():
         total_valid_inputs += inputs
-    
+
     if choice not in total_valid_inputs:
         return True
 
@@ -48,15 +50,15 @@ def reformat_user_choice(choice):
 
     match choice:
         case 'r':
-            choice = VALID_CHOICES["long"][0]
+            choice = 'rock'
         case 'p':
-            choice = VALID_CHOICES["long"][1]
+            choice = 'paper'
         case 's':
-            choice = VALID_CHOICES["long"][2]
+            choice = 'scissors'
         case 'l':
-            choice = VALID_CHOICES["long"][3]
+            choice = 'lizard'
         case 'k':
-            choice = VALID_CHOICES["long"][4]
+            choice = 'spock'
 
     return choice
 
@@ -81,7 +83,7 @@ def calculate_winner():
                                    computer_choice = computer_choice)
 
 def print_winner():
-    print(calculate_winner())
+    prompt(calculate_winner())
 
 def play_again():
     answer = input()
@@ -97,7 +99,7 @@ def start_game():
         print_winner()
         prompt(messages['replay'])
         if not play_again():
-            print(messages['goodbye'])
+            prompt(messages['goodbye'])
             break
 
 with open('rps_messages.json', 'r') as file:
@@ -110,8 +112,9 @@ start_game()
 # X add json file for messages
 # X Add clear screen at start of program and at replay
 # X add goodbye message
+# fix game rules formatting
 # add help function
-# add shortened input bonus feature
+# X add shortened input bonus feature
 # add best of five bonus feature
 # clear todo when done with code
 # clean up pylint comments
