@@ -149,3 +149,12 @@ while True:
     prompt(messages['retry'])
     if not redo_mortgage_calculation():
         break
+
+
+
+# TODO
+# fix input validation for loan amount and duration
+# fix input validation for years/months
+# change check_valid function name
+# de-load print_monthly and redo_calc functions
+
