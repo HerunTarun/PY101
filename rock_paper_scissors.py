@@ -22,9 +22,9 @@ def obtain_input():
     # add input
     prompt('placeholder')
 
-def check_input():
+def is_invalid_input():
     # add input validation
-    prompt('plcaeholder')
+    prompt('placeholder')
 
 def calculate_winner(choice, computer_choice):
     if choice == computer_choice:
@@ -42,35 +42,38 @@ def play_again():
     # add play again function
     prompt('placeholder')
 
+def start_game():
+    os.system('clear')
+    print_welcome()
+    while True:
+        prompt(f'Choose one: {", ".join(VALID_CHOICES)}')
+        choice = input()
+        while choice not in VALID_CHOICES:
+            prompt("That's not a valid choice")
+            choice = input()
+
+        computer_choice = random.choice(VALID_CHOICES)
+
+        prompt(f'You chose {choice}, computer chose {computer_choice}')
+
+        print_winner(choice, computer_choice)
+
+        prompt("Do you want to play again (y/n)?")
+        answer = input().lower()
+        while True:
+            if answer.startswith('n') or answer.startswith('y'):
+                break
+
+            prompt("Please enter 'y' or 'n'.")
+            answer = input().lower()
+
+        if answer[0] == 'n':
+            break
+
 with open('rps_messages.json', 'r') as file:
     messages = json.load(file)
 
-while True:
-    print_welcome()
-    
-    prompt(f'Choose one: {", ".join(VALID_CHOICES)}')
-    choice = input()
-    while choice not in VALID_CHOICES:
-        prompt("That's not a valid choice")
-        choice = input()
-
-    computer_choice = random.choice(VALID_CHOICES)
-
-    prompt(f'You chose {choice}, computer chose {computer_choice}')
-
-    print_winner(choice, computer_choice)
-
-    prompt("Do you want to play again (y/n)?")
-    answer = input().lower()
-    while True:
-        if answer.startswith('n') or answer.startswith('y'):
-            break
-
-        prompt("Please enter 'y' or 'n'.")
-        answer = input().lower()
-
-    if answer[0] == 'n':
-        break
+start_game()
     
 # TODO
 # X restructure program to use functions
