@@ -10,7 +10,7 @@ def obtain_loan():
     prompt(messages['obtain_loan_amount'])
     loan_amount = input().replace(',', '')
 
-    while valid_number(loan_amount):
+    while is_invalid_loan_amount(loan_amount):
         prompt(messages['invalid_loan_input'])
         loan_amount = input().replace(',', '')
 
@@ -20,7 +20,7 @@ def obtain_apr():
     prompt(messages['obtain_apr'])
     apr = input()
 
-    while valid_number(apr):
+    while is_invalid_apr(apr):
         prompt(messages['invalid_apr_input'])
         apr = input()
 
@@ -31,7 +31,7 @@ def obtain_duration():
     prompt(choose_mortgage_duration_prompt(unit))
     mortgage_duration = input()
 
-    while valid_number(mortgage_duration):
+    while is_invalid_duration(mortgage_duration):
         prompt(messages['invalid_duration_input'])
         mortgage_duration = input()
 
@@ -42,7 +42,7 @@ def choose_mortgage_duration_unit():
     prompt(messages['choose_mortgage_duration_unit_2'])
     unit = input().lower()
 
-    while valid_unit(unit):
+    while is_invalid_unit(unit):
         prompt(messages['invalid_mortgage_unit'])
         unit = input().lower()
 
@@ -55,7 +55,7 @@ def choose_mortgage_duration_prompt(unit):
         case 'm':
             return messages['obtain_mortgage_duration_months']
 
-def valid_number(number):
+def is_invalid_input(number):
     try:
         float(number)
     except ValueError:
@@ -64,14 +64,37 @@ def valid_number(number):
     if str(number) in ['nan', 'inf', '']:
         prompt(messages['funny_input'])
         return True
+
     if float(number) < 0:
         return True
-    if float(number) == 0:
-        return False
 
     return False
 
-def valid_unit(unit_str):
+def is_zero_input(number):
+    if float(number) == 0:
+        return True
+
+    return False
+
+def is_invalid_loan_amount(number):
+    if is_invalid_input(number) or is_zero_input(number):
+        return True
+    
+    return False
+
+def is_invalid_apr(number):
+    if is_invalid_input(number):
+        return True
+
+    return False
+
+def is_invalid_duration(number):
+    if is_invalid_input(number) or is_zero_input(number):
+        return True
+    
+    return False
+
+def is_invalid_unit(unit_str):
     try:
         str(unit_str)
     except ValueError:
@@ -105,7 +128,7 @@ def calculate_interest_factor(apr, duration, unit):
 
     return monthly_rate / interest_denominator
 
-def print_monthly_payment():
+def main():
     loan_amount = obtain_loan()
     apr = obtain_apr()
     duration, unit = obtain_duration()
@@ -147,7 +170,7 @@ with open('mortgagecalc_messages.json', 'r') as file:
 while True:
     os.system('clear')
     prompt(messages['start'])
-    print_monthly_payment()
+    main()
     prompt(messages['retry'])
     if not redo_calculation():
         prompt(messages['goodbye'])
@@ -158,8 +181,11 @@ while True:
 # TODO
 # X add clear screen at beginning of program
 # fix input validation for loan amount and duration
+# add function for negative number
+# add function for invalid number
 # X fix input validation for years/months
 # X change check_valid function name
-# de-load print_monthly 
-# de-load redo_calc functions
+# rename print monthly to start_program
+# nest functions inside functions
+# X de-load redo_calc functions
 
