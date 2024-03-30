@@ -1,9 +1,10 @@
 {
-    "welcome": "Welcome to Rock, Paper, Scissors, Lizard, Spock. You'll be playing against Ember.\nEmber isn't very good at this game, see if you can beat her!",
-    "game_rules": "The rules are simple. Scissors cuts paper, paper covers rock,\nrock crushes lizard, lizard poisons Spock, Spock smashes scissors,\nscissors decapitates lizard, lizard eats paper, paper disproves Spock, \nSpock vaporizes rock, and as it always has, rock crushes scissors",
+    "welcome": "Welcome to Rock, Paper, Scissors, Lizard, Spock. You'll be playing against Ember. Ember isn't very good at this game, see if you can beat her!",
+    "game_rules": "Help\nThe rules are simple. Scissors cuts paper, paper covers rock, rock crushes lizard, lizard poisons Spock, Spock smashes scissors, scissors decapitates lizard, lizard eats paper, paper disproves Spock, Spock vaporizes rock, and as it always has, rock crushes scissors.",
     "match_rules": "",
-    "win": "You won! Ember is considering renaming herself to Spark",
-    "lose": "Aww, you lost! Ember thinks it's time she became Flame",
-    "tie": "It's a tie! Ember wants to play again"
+    "win": "You chose {choice}, computer chose {computer_choice}\nYou won! Ember is considering renaming herself to Spark",
+    "lose": "You chose {choice}, computer chose {computer_choice}\nAww, you lost! Ember thinks it's time she became Flame",
+    "tie": "You chose {choice}, computer chose {computer_choice}\nIt's a tie! Ember wants to play again!",
+    "goodbye": "Ember says 'see you later!'"
     
 }
