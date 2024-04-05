@@ -9,6 +9,7 @@ WINNING_COMBINATIONS = {'rock': ['scissors', 'lizard'],
                         'paper': ['rock', 'spock'],
                         'lizard': ['spock', 'paper'],
                         'spock': ['scissors', 'rock']}
+ROUNDS_TO_WIN = 3 # for a best of five match
 
 def prompt(message):
     print(f'==> {message}')
@@ -91,21 +92,24 @@ def display_game_score(winner, choice, computer_choice):
                                       computer_choice = computer_choice))
 
 def display_match_score(user_score, computer_score):
-        prompt(messages['match_score'].format(user_score = user_score,
-                                              computer_score = computer_score))
+    prompt(messages['match_score'].format(user_score = user_score,
+                                          computer_score = computer_score))
 
 def clear_score(scores):
     scores.clear()
 
-def is_game_over(user_score, computer_score, scores):
-    if user_score == 3:
+def is_game_over(user_score, computer_score):
+    if ROUNDS_TO_WIN in (user_score, computer_score):
+        return True
+
+    return False
+
+def display_match_winner(user_score, computer_score):
+    if user_score == ROUNDS_TO_WIN:
         prompt(messages['user_match_winner'])
-        clear_score(scores)
-        return True
-    if computer_score == 3:
+
+    if computer_score == ROUNDS_TO_WIN:
         prompt(messages['computer_match_winner'])
-        clear_score(scores)
-        return True
 
     return False
 
@@ -127,10 +131,16 @@ def start_game():
         update_match_score(winner, scores)
         user_score = scores.count('1')
         computer_score = scores.count('2')
+        os.system('clear')
         display_game_score(winner, choice, computer_choice)
         display_match_score(user_score, computer_score)
-        if not is_game_over(user_score, computer_score, scores):
+
+        if is_game_over(user_score, computer_score):
+            display_match_winner(user_score, computer_score)
+            clear_score(scores)
+        else:
             continue
+
         prompt(messages['replay'])
         if not play_again():
             prompt(messages['goodbye'])
@@ -140,17 +150,3 @@ with open('rps_messages.json', 'r') as file:
     messages = json.load(file)
 
 start_game()
-    
-# TODO
-# X restructure program to use functions
-# X add json file for messages
-# X Add clear screen at start of program and at replay
-# X add goodbye message
-# X fix game rules formatting
-# add help function
-# X add shortened input bonus feature
-# X add best of five bonus feature
-# build Ember name tier [inferno, firestorm, blaze, Flame, Candle, Ember, Spark, ]
-# clear todo when done with code
-# X clean up pylint comments
-
