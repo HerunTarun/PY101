@@ -9,7 +9,7 @@ WINNING_COMBINATIONS = {'rock': ['scissors', 'lizard'],
                         'paper': ['rock', 'spock'],
                         'lizard': ['spock', 'paper'],
                         'spock': ['scissors', 'rock']}
-ROUNDS_TO_WIN = 3 # for a best of five match
+GAMES_TO_WIN = 3 # for a best of five match
 
 def prompt(message):
     print(f'==> {message}')
@@ -80,7 +80,7 @@ def update_match_score(winner, scores):
     if winner == 'lose':
         scores.append('2')
 
-def display_game_score(winner, choice, computer_choice):
+def display_game_result(winner, choice, computer_choice):
     if winner == 'win':
         prompt(messages['win'].format(choice = choice,
                                       computer_choice = computer_choice))
@@ -99,16 +99,16 @@ def clear_score(scores):
     scores.clear()
 
 def is_game_over(user_score, computer_score):
-    if ROUNDS_TO_WIN in (user_score, computer_score):
+    if GAMES_TO_WIN in (user_score, computer_score):
         return True
 
     return False
 
 def display_match_winner(user_score, computer_score):
-    if user_score == ROUNDS_TO_WIN:
+    if user_score == GAMES_TO_WIN:
         prompt(messages['user_match_winner'])
 
-    if computer_score == ROUNDS_TO_WIN:
+    if computer_score == GAMES_TO_WIN:
         prompt(messages['computer_match_winner'])
 
     return False
@@ -138,7 +138,7 @@ def start_game():
         computer_score = scores.count('2')
 
         clear_screen()
-        display_game_score(winner, choice, computer_choice)
+        display_game_result(winner, choice, computer_choice)
         display_match_score(user_score, computer_score)
 
         if is_game_over(user_score, computer_score):
