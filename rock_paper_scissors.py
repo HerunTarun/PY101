@@ -14,7 +14,7 @@ ROUNDS_TO_WIN = 3 # for a best of five match
 def prompt(message):
     print(f'==> {message}')
 
-def print_welcome():
+def display_welcome():
     prompt(messages['welcome'])
     prompt(messages['name_intro'])
     prompt(messages['game_rules'])
@@ -125,15 +125,18 @@ def clear_screen():
 
 def start_game():
     clear_screen()
-    print_welcome()
+    display_welcome()
     scores = []
     while True:
         choice = obtain_user_choice()
         computer_choice = generate_computer_choice()
         winner = calculate_winner(choice, computer_choice)
+
         update_match_score(winner, scores)
+
         user_score = scores.count('1')
         computer_score = scores.count('2')
+
         clear_screen()
         display_game_score(winner, choice, computer_choice)
         display_match_score(user_score, computer_score)
@@ -145,6 +148,7 @@ def start_game():
             continue
 
         prompt(messages['replay'])
+
         if not play_again():
             prompt(messages['goodbye'])
             break
