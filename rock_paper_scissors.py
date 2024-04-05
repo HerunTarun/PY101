@@ -117,11 +117,14 @@ def play_again():
     answer = input()
     while answer.lower() not in ['y', 'yes']:
         return False
-    os.system('clear')
+    clear_screen()
     return True
 
-def start_game():
+def clear_screen():
     os.system('clear')
+
+def start_game():
+    clear_screen()
     print_welcome()
     scores = []
     while True:
@@ -131,7 +134,7 @@ def start_game():
         update_match_score(winner, scores)
         user_score = scores.count('1')
         computer_score = scores.count('2')
-        os.system('clear')
+        clear_screen()
         display_game_score(winner, choice, computer_choice)
         display_match_score(user_score, computer_score)
 
