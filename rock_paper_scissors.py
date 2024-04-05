@@ -2,21 +2,20 @@ import json
 import random
 import os
 
-VALID_CHOICES = {'long': ['rock', 'paper', 'scissors', 'lizard', 'spock'], 
+VALID_CHOICES = {'long': ['rock', 'paper', 'scissors', 'lizard', 'spock'],
                  'short': ['r', 'p', 's', 'l', 'k']}
 WINNING_COMBINATIONS = {'rock': ['scissors', 'lizard'],
                         'scissors': ['paper', 'lizard'],
                         'paper': ['rock', 'spock'],
                         'lizard': ['spock', 'paper'],
-                        'spock': ['scissors', 'rock']
-}
+                        'spock': ['scissors', 'rock']}
 
 def prompt(message):
     print(f'==> {message}')
 
 def print_welcome():
     prompt(messages['welcome'])
-    prompt(messages['ember_intro'])
+    prompt(messages['name_intro'])
     prompt(messages['game_rules'])
     prompt(messages['match_rules'])
 
@@ -73,54 +72,43 @@ def calculate_winner(choice, computer_choice):
 
     return 'lose'
 
-def update_match_score(winner):
+def update_match_score(winner, scores):
     if winner == 'win':
-        nonlocal user_score
-        user_score += 1
-    
-    if winner == 'lose':
-        nonlocal computer_score
-        computer_score += 1
+        scores.append('1')
 
-def display_score(winner, choice, computer_choice, user_score, computer_score):
-    display_game_score(winner, choice, computer_choice)
-    display_match_score(user_score, computer_score)
-    
+    if winner == 'lose':
+        scores.append('2')
 
 def display_game_score(winner, choice, computer_choice):
     if winner == 'win':
-        return messages['win'].format(choice = choice, 
-                                      computer_choice = computer_choice)
+        prompt(messages['win'].format(choice = choice,
+                                      computer_choice = computer_choice))
     elif winner == 'lose':
-        return messages['lose'].format(choice = choice, 
-                                  computer_choice = computer_choice)
+        prompt(messages['lose'].format(choice = choice,
+                                       computer_choice = computer_choice))
     else:
-        return messages['tie'].format(choice = choice, 
-                                     computer_choice = computer_choice)
+        prompt(messages['tie'].format(choice = choice,
+                                      computer_choice = computer_choice))
 
-        
 def display_match_score(user_score, computer_score):
-        prompt(messages['match_score']).format(user_score = user_score, # WRITE MATCH SCORE MESSAGE
-                                     computer_score = computer_score)
+        prompt(messages['match_score'].format(user_score = user_score,
+                                              computer_score = computer_score))
 
-def is_game_over(user_score, computer_score):
-    def clear_score():
-        nonlocal user_score
-        user_score = 0
-        nonlocal computer_score
-        user_score = 0
+def clear_score(scores):
+    scores.clear()
 
+def is_game_over(user_score, computer_score, scores):
     if user_score == 3:
-        prompt([messages['user_match_winner']]) # WRITE MESSAGE
-        clear_score()
+        prompt(messages['user_match_winner'])
+        clear_score(scores)
         return True
     if computer_score == 3:
-        prompt([messages['computer_match_winner']]) # WRITE MESSAGE
-        clear_score()
+        prompt(messages['computer_match_winner'])
+        clear_score(scores)
         return True
 
     return False
-        
+
 def play_again():
     answer = input()
     while answer.lower() not in ['y', 'yes']:
@@ -131,16 +119,17 @@ def play_again():
 def start_game():
     os.system('clear')
     print_welcome()
-    
+    scores = []
     while True:
         choice = obtain_user_choice()
         computer_choice = generate_computer_choice()
         winner = calculate_winner(choice, computer_choice)
-        user_score = 0
-        computer_score = 0
-        update_match_score(winner)
-        display_score(choice, computer_choice, user_score, computer_score)
-        if not is_game_over(user_score, computer_score):
+        update_match_score(winner, scores)
+        user_score = scores.count('1')
+        computer_score = scores.count('2')
+        display_game_score(winner, choice, computer_choice)
+        display_match_score(user_score, computer_score)
+        if not is_game_over(user_score, computer_score, scores):
             continue
         prompt(messages['replay'])
         if not play_again():
@@ -157,10 +146,11 @@ start_game()
 # X add json file for messages
 # X Add clear screen at start of program and at replay
 # X add goodbye message
-# fix game rules formatting
+# X fix game rules formatting
 # add help function
 # X add shortened input bonus feature
-# add best of five bonus feature
+# X add best of five bonus feature
+# build Ember name tier [inferno, firestorm, blaze, Flame, Candle, Ember, Spark, ]
 # clear todo when done with code
-# clean up pylint comments
+# X clean up pylint comments
 

@@ -1,17 +1,17 @@
 {
     "welcome": "Welcome to Rock, Paper, Scissors, Lizard, Spock.",
-    "{name}_intro": "You'll be playing against {name}. {name} isn't very good at this game, see if you can beat her!,
-    "game_rules": "Rem{name}, scissors cuts paper, paper covers rock, rock crushes lizard, lizard poisons Spock, Spock smashes scissors, scissors decapitates lizard, lizard eats paper, paper disproves Spock, Spock vaporizes rock, and as it always has, rock crushes scissors.",
+    "name_intro": "You'll be playing against Ember. Ember isn't very good at this game, see if you can beat her!",
+    "game_rules": "Remember, scissors cuts paper, paper covers rock, rock crushes lizard, lizard poisons Spock, Spock smashes scissors, scissors decapitates lizard, lizard eats paper, paper disproves Spock, Spock vaporizes rock, and as it always has, rock crushes scissors.",
     "match_rules": "First one to three wins takes the match!",
     "user_input": "Choose either 'rock', 'paper', 'scissors', 'lizard', 'spock' or 'r', 'p', 's', 'l', 'k'",
     "invalid_input": "That won't work. Try 'rock', 'paper', 'scissors', 'lizard', 'spock' or 'r', 'p', 's', 'l', 'k'!",
-    "win": "You chose {choice}, {name} chose {computer_choice}\nYou won! {name} is considering renaming herself to Spark",
-    "lose": "You chose {choice}, {name} chose {computer_choice}\nAww, you lost! {name} thinks it's time she became Flame",
-    "tie": "You chose {choice}, {name} chose {computer_choice}\nIt's a tie! {name} wants to play again!",
+    "win": "You chose {choice}, Ember chose {computer_choice}\nYou won! Ember is considering renaming herself to Spark",
+    "lose": "You chose {choice}, Ember chose {computer_choice}\nAww, you lost! Ember thinks it's time she became Flame",
+    "tie": "You chose {choice}, Ember chose {computer_choice}\nIt's a tie! Ember wants to play again!",
     "match_score": "The match score is {user_score} : {computer_score}",
-    "user_match_winner": "You won the match! {name} is now, begrudgingly, Spark",
-    "computer_match_winner": "Aw, you lost! {name}'s changed her name to Flame!",
-    "replay": "Do you want to play {name} again? Enter 'y' or 'n'!",
-    "goodbye": "{name} says 'See you later!'"
+    "user_match_winner": "You won the match! Ember is now, begrudgingly, Spark",
+    "computer_match_winner": "Aw, you lost! Ember changed her name to Blaze!",
+    "replay": "Do you want to play Ember again? Enter 'y' or 'n'!",
+    "goodbye": "Ember says 'See you later!'"
     
 }
