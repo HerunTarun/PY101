@@ -1,0 +1,3 @@
+What are mary's permissions to the laptop file in the following example? What are the permissions for the group acmeinc?
+
+As user, Mary has read and execute access, while acmeinc has read, write, and execute access

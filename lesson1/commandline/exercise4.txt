@@ -1,0 +1,3 @@
+What are mary's permissions to the donuts file in the following example:
+
+As part of the vip group, Mary has read and write access to the donuts file

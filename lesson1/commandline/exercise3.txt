@@ -1,0 +1,5 @@
+What are mary's permissions for the napkins file in the following outputs?
+
+she has no permissions. The user and group are acmeair, and mary is not part of the acmeair group. 
+
+There are also no permissions assigned to others, so she has no access types at all

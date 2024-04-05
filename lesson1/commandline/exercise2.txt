@@ -1,0 +1,10 @@
+Which user and group are assigned to the $HOME folder?
+
+
+$HOME is a variable assigned to, in my case, the path /home/ec2-user
+
+so you're really asking about the user and group assigned to ec2-user
+
+that can be found using ls -l /home
+
+ec2-user has a ec2-user assigned as a user, and ec2-user assigned as group
