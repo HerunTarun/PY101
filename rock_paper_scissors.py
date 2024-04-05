@@ -14,13 +14,10 @@ WINNING_COMBINATIONS = {'rock': ['scissors', 'lizard'],
 def prompt(message):
     print(f'==> {message}')
 
-def game_rules():
-    prompt(messages['game_rules'])
-
 def print_welcome():
     prompt(messages['welcome'])
     prompt(messages['ember_intro'])
-    game_rules()
+    prompt(messages['game_rules'])
     prompt(messages['match_rules'])
 
 def obtain_user_choice():
@@ -67,24 +64,63 @@ def generate_computer_choice():
 
     return computer_choice
 
-def calculate_winner():
-    choice = obtain_user_choice()
-    computer_choice = generate_computer_choice()
-
+def calculate_winner(choice, computer_choice):
     if choice == computer_choice:
+        return 'tie'
+
+    if computer_choice in WINNING_COMBINATIONS[choice]:
+        return 'win'
+
+    return 'lose'
+
+def update_match_score(winner):
+    if winner == 'win':
+        nonlocal user_score
+        user_score += 1
+    
+    if winner == 'lose':
+        nonlocal computer_score
+        computer_score += 1
+
+def display_score(winner, choice, computer_choice, user_score, computer_score):
+    display_game_score(winner, choice, computer_choice)
+    display_match_score(user_score, computer_score)
+    
+
+def display_game_score(winner, choice, computer_choice):
+    if winner == 'win':
+        return messages['win'].format(choice = choice, 
+                                      computer_choice = computer_choice)
+    elif winner == 'lose':
+        return messages['lose'].format(choice = choice, 
+                                  computer_choice = computer_choice)
+    else:
         return messages['tie'].format(choice = choice, 
                                      computer_choice = computer_choice)
 
-    if computer_choice in WINNING_COMBINATIONS[choice]:
-        return messages['win'].format(choice = choice, 
-                                      computer_choice = computer_choice)
+        
+def display_match_score(user_score, computer_score):
+        prompt(messages['match_score']).format(user_score = user_score, # WRITE MATCH SCORE MESSAGE
+                                     computer_score = computer_score)
 
-    return messages['lose'].format(choice = choice, 
-                                   computer_choice = computer_choice)
+def is_game_over(user_score, computer_score):
+    def clear_score():
+        nonlocal user_score
+        user_score = 0
+        nonlocal computer_score
+        user_score = 0
 
-def print_winner():
-    prompt(calculate_winner())
+    if user_score == 3:
+        prompt([messages['user_match_winner']]) # WRITE MESSAGE
+        clear_score()
+        return True
+    if computer_score == 3:
+        prompt([messages['computer_match_winner']]) # WRITE MESSAGE
+        clear_score()
+        return True
 
+    return False
+        
 def play_again():
     answer = input()
     while answer.lower() not in ['y', 'yes']:
@@ -95,8 +131,17 @@ def play_again():
 def start_game():
     os.system('clear')
     print_welcome()
+    
     while True:
-        print_winner()
+        choice = obtain_user_choice()
+        computer_choice = generate_computer_choice()
+        winner = calculate_winner(choice, computer_choice)
+        user_score = 0
+        computer_score = 0
+        update_match_score(winner)
+        display_score(choice, computer_choice, user_score, computer_score)
+        if not is_game_over(user_score, computer_score):
+            continue
         prompt(messages['replay'])
         if not play_again():
             prompt(messages['goodbye'])
