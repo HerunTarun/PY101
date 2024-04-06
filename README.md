@@ -1,1 +1,1 @@
-This is the repository for all things PY101
+This is the consolidated repository for all things PY101
