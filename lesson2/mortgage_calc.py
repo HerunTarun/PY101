@@ -128,17 +128,6 @@ def calculate_monthly_payment(loan_amount, apr, duration, unit):
 
     return monthly_payment
 
-def obtain_loan_details():
-    loan_amount = obtain_loan()
-    apr = obtain_apr()
-    duration, unit = obtain_duration()
-    monthly_payment = calculate_monthly_payment(loan_amount,
-                                                apr,
-                                                duration,
-                                                unit)
-
-    return loan_amount, apr, duration, unit, monthly_payment
-
 def format_unit_in_payment(unit, duration):
     match unit:
         case 'y':
@@ -150,8 +139,7 @@ def format_unit_in_payment(unit, duration):
                 return 'month'
             return 'months'
 
-def print_monthly_payment():
-    loan_amount, apr, duration, unit, monthly_payment = obtain_loan_details()
+def print_monthly_payment(unit, duration):
 
     unit = format_unit_in_payment(unit, duration)
 
@@ -172,7 +160,14 @@ def start_program():
     os.system('clear')
     prompt(messages['start'])
     while True:
-        print_monthly_payment()
+        loan_amount = obtain_loan()
+        apr = obtain_apr()
+        duration, unit = obtain_duration()
+        monthly_payment = calculate_monthly_payment(loan_amount,
+                                                    apr,
+                                                    duration,
+                                                    unit)
+        print_monthly_payment(unit, duration)
         prompt(messages['retry'])
         if not repeat_program():
             prompt(messages['goodbye'])
