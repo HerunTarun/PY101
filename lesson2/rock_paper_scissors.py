@@ -102,7 +102,7 @@ def reformat_user_choice(choice):
     if choice in VALID_CHOICES['long']:
         return choice
 
-    match choice:
+    match choice.lower():
         case 'r':
             choice = 'rock'
         case 'p':
