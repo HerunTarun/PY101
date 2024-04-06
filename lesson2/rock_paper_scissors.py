@@ -54,6 +54,32 @@ def display_match_winner(scores):
     if scores['computer_score'] == GAMES_TO_WIN:
         prompt(messages['computer_match_winner'])
 
+def is_invalid_input(choice):
+    total_valid_inputs = []
+    for inputs in VALID_CHOICES.values():
+        total_valid_inputs += inputs
+
+    if choice.lower() not in total_valid_inputs:
+        return True
+
+    return False
+
+def is_game_over(scores):
+    if GAMES_TO_WIN in list(scores.values()):
+        return True
+
+    return False
+
+def is_yes():
+    answer = input()
+
+    while answer.lower() not in ['y', 'yes']:
+        return False
+
+    clear_screen()
+
+    return True
+
 def clear_score(scores):
     scores['user_score'] = 0
     scores['computer_score'] = 0
@@ -71,16 +97,6 @@ def obtain_user_choice():
 
     choice = reformat_user_choice(choice)
     return choice
-
-def is_invalid_input(choice):
-    total_valid_inputs = []
-    for inputs in VALID_CHOICES.values():
-        total_valid_inputs += inputs
-
-    if choice.lower() not in total_valid_inputs:
-        return True
-
-    return False
 
 def reformat_user_choice(choice):
     if choice in VALID_CHOICES['long']:
@@ -120,22 +136,6 @@ def update_match_score(winner, scores):
 
     if winner == 'lose':
         scores['computer_score'] += 1
-
-def is_game_over(scores):
-    if GAMES_TO_WIN in list(scores.values()):
-        return True
-
-    return False
-
-def is_yes():
-    answer = input()
-
-    while answer.lower() not in ['y', 'yes']:
-        return False
-
-    clear_screen()
-
-    return True
 
 def replay_game():
     display_replay_message()
