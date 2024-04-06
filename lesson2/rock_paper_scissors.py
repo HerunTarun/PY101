@@ -21,6 +21,47 @@ def display_welcome():
     prompt(messages['game_rules'])
     prompt(messages['match_rules'])
 
+def display_loading_time():
+    for num in range(1,4):
+        print(num * ".")
+        time.sleep(1)
+
+def display_replay_message():
+    prompt(messages['replay'])
+
+def display_goodbye():
+    prompt(messages['goodbye'])
+
+def display_game_result(winner, choice, computer_choice):
+    if winner == 'win':
+        prompt(messages['win'].format(choice = choice,
+                                      computer_choice = computer_choice))
+    elif winner == 'lose':
+        prompt(messages['lose'].format(choice = choice,
+                                       computer_choice = computer_choice))
+    else:
+        prompt(messages['tie'].format(choice = choice,
+                                      computer_choice = computer_choice))
+
+def display_match_score(user_score, computer_score):
+    prompt(messages['match_score'].format(user_score = user_score,
+                                          computer_score = computer_score))
+
+def display_match_winner(user_score, computer_score):
+    if user_score == GAMES_TO_WIN:
+        prompt(messages['user_match_winner'])
+
+    if computer_score == GAMES_TO_WIN:
+        prompt(messages['computer_match_winner'])
+
+    return False
+
+def clear_score(scores):
+    scores.clear()
+
+def clear_screen():
+    os.system('clear')
+
 def obtain_user_choice():
     prompt(messages['user_input'])
 
@@ -81,36 +122,9 @@ def update_match_score(winner, scores):
     if winner == 'lose':
         scores.append('2')
 
-def display_game_result(winner, choice, computer_choice):
-    if winner == 'win':
-        prompt(messages['win'].format(choice = choice,
-                                      computer_choice = computer_choice))
-    elif winner == 'lose':
-        prompt(messages['lose'].format(choice = choice,
-                                       computer_choice = computer_choice))
-    else:
-        prompt(messages['tie'].format(choice = choice,
-                                      computer_choice = computer_choice))
-
-def display_match_score(user_score, computer_score):
-    prompt(messages['match_score'].format(user_score = user_score,
-                                          computer_score = computer_score))
-
-def clear_score(scores):
-    scores.clear()
-
 def is_game_over(user_score, computer_score):
     if GAMES_TO_WIN in (user_score, computer_score):
         return True
-
-    return False
-
-def display_match_winner(user_score, computer_score):
-    if user_score == GAMES_TO_WIN:
-        prompt(messages['user_match_winner'])
-
-    if computer_score == GAMES_TO_WIN:
-        prompt(messages['computer_match_winner'])
 
     return False
 
@@ -120,20 +134,6 @@ def restart_game():
         return False
     clear_screen()
     return True
-
-def clear_screen():
-    os.system('clear')
-
-def display_loading_time():
-    for num in range(1,4):
-        print(num * ".")
-        time.sleep(1)
-
-def display_replay_message():
-    prompt(messages['replay'])
-
-def display_goodbye():
-    prompt(messages['goodbye'])
 
 def start_game():
     clear_screen()
