@@ -1,6 +1,7 @@
 import json
 import random
 import os
+import time
 
 VALID_CHOICES = {'long': ['rock', 'paper', 'scissors', 'lizard', 'spock'],
                  'short': ['r', 'p', 's', 'l', 'k']}
@@ -36,7 +37,7 @@ def is_invalid_input(choice):
     for inputs in VALID_CHOICES.values():
         total_valid_inputs += inputs
 
-    if choice not in total_valid_inputs:
+    if choice.lower() not in total_valid_inputs:
         return True
 
     return False
@@ -113,7 +114,7 @@ def display_match_winner(user_score, computer_score):
 
     return False
 
-def play_again():
+def restart_game():
     answer = input()
     while answer.lower() not in ['y', 'yes']:
         return False
@@ -122,6 +123,17 @@ def play_again():
 
 def clear_screen():
     os.system('clear')
+
+def display_loading_time():
+    for num in range(1,4):
+        print(num * ".")
+        time.sleep(1)
+
+def display_replay_message():
+    prompt(messages['replay'])
+
+def display_goodbye():
+    prompt(messages['goodbye'])
 
 def start_game():
     clear_screen()
@@ -138,6 +150,8 @@ def start_game():
         computer_score = scores.count('2')
 
         clear_screen()
+        display_loading_time()
+        
         display_game_result(winner, choice, computer_choice)
         display_match_score(user_score, computer_score)
 
@@ -147,10 +161,10 @@ def start_game():
         else:
             continue
 
-        prompt(messages['replay'])
+        display_replay_message()
 
-        if not play_again():
-            prompt(messages['goodbye'])
+        if not restart_game():
+            display_goodbye()
             break
 
 with open('rps_messages.json', 'r') as file:
@@ -160,13 +174,13 @@ start_game()
 
 # # Code Review Feedback
 # User Experience/Gameplay
-# add uppercase flexibility
-# clarify abbreviation for each input
-# add pause between user choice and computer choice
+# X add uppercase flexibility
+# X clarify abbreviation for each input
+# X add pause between user choice and computer choice
 
 # Source Code
-# remove low level prompt calls in main loop
-# rename play again to reflect its true/false nature
+# X remove low level prompt calls in main loop
+# X rename play again to reflect its true/false nature
 # redo scores data structure
 # assign 1 and 2 in scores to constants
 
