@@ -22,7 +22,7 @@ def display_welcome():
     prompt(messages['match_rules'])
 
 def display_loading_time():
-    for num in range(1,4):
+    for num in range(1, 4):
         print(num * ".")
         time.sleep(1)
 
@@ -43,21 +43,22 @@ def display_game_result(winner, choice, computer_choice):
         prompt(messages['tie'].format(choice = choice,
                                       computer_choice = computer_choice))
 
-def display_match_score(user_score, computer_score):
-    prompt(messages['match_score'].format(user_score = user_score,
-                                          computer_score = computer_score))
+def display_match_score(scores):
+    prompt(messages['match_score'].format(user_score = scores['user_score'],
+                                    computer_score = scores['computer_score']))
 
-def display_match_winner(user_score, computer_score):
-    if user_score == GAMES_TO_WIN:
+def display_match_winner(scores):
+    if scores['user_score'] == GAMES_TO_WIN:
         prompt(messages['user_match_winner'])
 
-    if computer_score == GAMES_TO_WIN:
+    if scores['computer_score'] == GAMES_TO_WIN:
         prompt(messages['computer_match_winner'])
 
     return False
 
 def clear_score(scores):
-    scores.clear()
+    scores['user_score'] = 0
+    scores['computer_score'] = 0
 
 def clear_screen():
     os.system('clear')
@@ -117,13 +118,13 @@ def calculate_winner(choice, computer_choice):
 
 def update_match_score(winner, scores):
     if winner == 'win':
-        scores.append('1')
+        scores['user_score'] += 1
 
     if winner == 'lose':
-        scores.append('2')
+        scores['computer_score'] += 1
 
-def is_game_over(user_score, computer_score):
-    if GAMES_TO_WIN in (user_score, computer_score):
+def is_game_over(scores):
+    if GAMES_TO_WIN in list(scores.values()):
         return True
 
     return False
@@ -138,7 +139,7 @@ def restart_game():
 def start_game():
     clear_screen()
     display_welcome()
-    scores = []
+    scores = {'user_score': 0, 'computer_score': 0}
     while True:
         choice = obtain_user_choice()
         computer_choice = generate_computer_choice()
@@ -146,17 +147,14 @@ def start_game():
 
         update_match_score(winner, scores)
 
-        user_score = scores.count('1')
-        computer_score = scores.count('2')
-
         clear_screen()
         display_loading_time()
-        
-        display_game_result(winner, choice, computer_choice)
-        display_match_score(user_score, computer_score)
 
-        if is_game_over(user_score, computer_score):
-            display_match_winner(user_score, computer_score)
+        display_game_result(winner, choice, computer_choice)
+        display_match_score(scores)
+
+        if is_game_over(scores):
+            display_match_winner(scores)
             clear_score(scores)
         else:
             continue
@@ -181,11 +179,12 @@ start_game()
 # Source Code
 # X remove low level prompt calls in main loop
 # X rename play again to reflect its true/false nature
-# redo scores data structure
-# assign 1 and 2 in scores to constants
+# X redo scores data structure
+# N/A assign 1 and 2 in scores to constants
 
 # Pylint
 # no errors
+# X run pylint to remove errors
 
 # Overall
 # play around with scores and replay logic
