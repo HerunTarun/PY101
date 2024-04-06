@@ -54,8 +54,6 @@ def display_match_winner(scores):
     if scores['computer_score'] == GAMES_TO_WIN:
         prompt(messages['computer_match_winner'])
 
-    return False
-
 def clear_score(scores):
     scores['user_score'] = 0
     scores['computer_score'] = 0
@@ -129,11 +127,23 @@ def is_game_over(scores):
 
     return False
 
-def restart_game():
+def is_yes():
     answer = input()
+
     while answer.lower() not in ['y', 'yes']:
         return False
+
     clear_screen()
+
+    return True
+
+def replay_game():
+    display_replay_message()
+
+    if not is_yes():
+        display_goodbye()
+        return False
+
     return True
 
 def start_game():
@@ -159,10 +169,7 @@ def start_game():
         else:
             continue
 
-        display_replay_message()
-
-        if not restart_game():
-            display_goodbye()
+        if not replay_game():
             break
 
 with open('rps_messages.json', 'r') as file:
