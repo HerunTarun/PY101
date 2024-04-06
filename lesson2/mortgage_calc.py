@@ -182,3 +182,6 @@ with open('mortgagecalc_messages.json', 'r') as file:
     messages = json.load(file)
 
 start_program()
+
+# Code Review
+# refactor program to accurately reflect what's happening in th emain loop

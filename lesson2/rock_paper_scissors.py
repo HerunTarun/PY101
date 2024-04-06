@@ -157,3 +157,21 @@ with open('rps_messages.json', 'r') as file:
     messages = json.load(file)
 
 start_game()
+
+# # Code Review Feedback
+# User Experience/Gameplay
+# add uppercase flexibility
+# clarify abbreviation for each input
+# add pause between user choice and computer choice
+
+# Source Code
+# remove low level prompt calls in main loop
+# rename play again to reflect its true/false nature
+# redo scores data structure
+# assign 1 and 2 in scores to constants
+
+# Pylint
+# no errors
+
+# Overall
+# play around with scores and replay logic
